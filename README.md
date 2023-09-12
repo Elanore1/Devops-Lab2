@@ -1,12 +1,13 @@
 # Devops-Lab2
 
-Test of the change 
+What is Happening 
 
 ## Short Description
 
 Work to covers the basics of Git
 
 ## List of Functionalities
+None
 
 ## Installation Instructions
 
