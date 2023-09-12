@@ -1,6 +1,7 @@
 # Devops-Lab2
 
-Test of the change 
+We are testing to modify the same line 
+This is so nice to discovered 
 
 ## Short Description
 
@@ -12,6 +13,7 @@ Work to covers the basics of Git
 
 ## Usage Instructions
 
+lalalalla
 
 ## Author Information
 
