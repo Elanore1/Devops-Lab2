@@ -28,9 +28,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
        cache-dependency-path: './labs/lab03'
-             working-directory: './labs/lab03'
-
-
+       working-directory: './labs/lab03'
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
