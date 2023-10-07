@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services: 
+    services:
       redis:
         image: redis
         options: >-
@@ -20,20 +20,26 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [14.x] # Use a valid Node.js version here
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2 # Change to v2 as it was the latest at my last knowledge update
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: './labs/lab03/package-lock.json'
-    - run: npm install
-      working-directory: './labs/lab03'
-    - run: npm run build --if-present
-      working-directory: './labs/lab03'
-    - run: npm test
-      working-directory: './labs/lab03'
+
+    - name: Install Dependencies and Build
+      run: |
+        cd labs/lab03
+        npm install
+        npm run build --if-present
+      working-directory: ./labs/lab03
+
+    - name: Run Tests
+      run: |
+        cd labs/lab03
+        npm test
+      working-directory: ./labs/lab03
