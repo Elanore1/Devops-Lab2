@@ -34,14 +34,14 @@ jobs:
     - name: Install Dependencies and Build
       run: |
         # Change the path accordingly
-        cd path/to/labs/lab03
+        cd ./labs/lab03
         npm install
         npm run build --if-present
-      working-directory: ./path/to/labs/lab03
+      working-directory: ./labs/lab03
 
     - name: Run Tests
       run: |
         # Change the path accordingly
-        cd path/to/labs/lab03
+        cd ./labs/lab03
         npm test
-      working-directory: ./path/to/labs/lab03
+      working-directory: ./labs/lab03
