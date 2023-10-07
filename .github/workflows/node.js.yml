@@ -27,19 +27,21 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2 # Change to v2 as it was the latest at my last knowledge update
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
 
     - name: Install Dependencies and Build
       run: |
-        cd labs/lab03
+        # Change the path accordingly
+        cd path/to/labs/lab03
         npm install
         npm run build --if-present
-      working-directory: ./labs/lab03
+      working-directory: ./path/to/labs/lab03
 
     - name: Run Tests
       run: |
-        cd labs/lab03
+        # Change the path accordingly
+        cd path/to/labs/lab03
         npm test
-      working-directory: ./labs/lab03
+      working-directory: ./path/to/labs/lab03
