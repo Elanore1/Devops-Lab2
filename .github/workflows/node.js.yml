@@ -34,18 +34,16 @@ jobs:
         with:
           node-version: 16
 
-  
       - name: Install dependencies
-        working-directory: /labs/lab03
+        working-directory: ./labs/lab03
         run: npm install
-      
-        - run: npm install
+
+      - run: npm install
         working-directory: './labs/lab03'
-          shell: /bin/sh
-        
+        shell: /bin/sh
 
       - name: Run Test
-        working-directory: /labs/lab03
+        working-directory: ./labs/lab03
         run: npm run test
         env:
           REDIS_HOST: localhost
