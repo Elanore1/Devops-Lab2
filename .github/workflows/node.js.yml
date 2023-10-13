@@ -34,9 +34,15 @@ jobs:
         with:
           node-version: 16
 
+  
       - name: Install dependencies
         working-directory: /labs/lab03
         run: npm install
+      
+        - run: npm install
+        working-directory: './labs/lab03'
+          shell: /bin/sh
+        
 
       - name: Run Test
         working-directory: /labs/lab03
