@@ -38,10 +38,6 @@ jobs:
         working-directory: ./labs/lab03
         run: npm install
 
-      - run: npm install
-        working-directory: './labs/lab03'
-        shell: /bin/sh
-
       - name: Run Test
         working-directory: ./labs/lab03
         run: npm run test
