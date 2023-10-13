@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x] # Use a valid Node.js version here
+        node-version: [19.x] # Use a valid Node.js version here
 
     steps:
     - name: Checkout code
