@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
+    services: 
       redis:
         image: redis
         options: >-
@@ -20,28 +20,18 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [19.x] # Use a valid Node.js version here
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Install Dependencies and Build
-      run: |
-        # Change the path accordingly
-        cd ./labs/lab03
-        npm install
-        npm run build --if-present
-      working-directory: /labs/lab03
-
-    - name: Run Tests
-      run: |
-        # Change the path accordingly
-        cd ./labs/lab03
-        npm test
-      working-directory: /labs/lab03
+        cache: 'npm'
+        cache-dependency-path: './labs/lab03'
+    - run: npm ci
+      working-directory: './labs/lab03'
+    - run: npm run build --if-present
+    - run: npm test
