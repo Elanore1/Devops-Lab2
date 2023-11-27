@@ -15,7 +15,14 @@ This application is written on NodeJS and it uses Redis database.
 
 2. [Install Redis](https://redis.io/download)
 
-3. Install application
+3. [Install Docker](https://redis.io/download)
+
+4. [Install Kubernetes](https://redis.io/download)
+
+5. [Install Vagrant](https://redis.io/download)
+
+
+6. Install application
 
 Go to the root directory of the application (where `package.json` file located) and run:
 
@@ -61,3 +68,5 @@ From the root directory of the project, run:
 ```
 npm test
 ```
+
+
