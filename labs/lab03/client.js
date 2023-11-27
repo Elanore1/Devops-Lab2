@@ -2,7 +2,6 @@ const redis = require("redis");
 
 // Creates a new Redis client
 // If REDIS_HOST is not set, the default host is localhost
-// If REDIS_PORT is not set, the default port is 6379
 const redisClient = redis.createClient({
   url: `redis://${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}`
 });

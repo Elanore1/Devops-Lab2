@@ -6,8 +6,7 @@ var db = redis.createClient({
   host: config.redis.host,
   port: config.redis.port,
   retry_strategy: () => {
-    // Return undefined to keep retrying indefinitely
-    return undefined;
+    return new Error("Retry time exhausted")
   }
 })
 
@@ -15,4 +14,4 @@ process.on('SIGINT', function() {
   db.quit();
 });
 
-module.exports = db;
+module.exports = db
