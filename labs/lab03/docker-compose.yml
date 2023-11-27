@@ -1,6 +1,14 @@
 version: '3.4'
 
 services:
+  redis:
+    image:  redis:6.2-alpine
+    container_name: redis
+    restart: unless-stopped
+    network_mode: bridge
+    expose:
+      - 6379
+
   eceuserapi:
     image: eceuserapi
     build:
@@ -9,4 +17,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 5000:3000
+      - 3000:3000
+    links:
+      - redis
+      
