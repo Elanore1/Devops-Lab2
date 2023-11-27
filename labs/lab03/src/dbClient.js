@@ -1,5 +1,6 @@
 const redis = require("redis");
 
+<<<<<<< HEAD
 const REDIS_HOST = process.env.REDIS_HOST || 'redis';
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 
@@ -10,9 +11,19 @@ const db = redis.createClient({
 
 db.on('connect', () => console.log(`Redis is connected on port ${REDIS_PORT}`));
 db.on('error', (error) => console.error(error));
+=======
+const config = configure()
+var db = redis.createClient({
+  host: config.redis.host,
+  port: config.redis.port,
+  retry_strategy: () => {
+    return new Error("Retry time exhausted")
+  }
+})
+>>>>>>> e60bfb7 (fix:vagrant,docker,userapi)
 
 process.on('SIGINT', function() {
   db.quit();
 });
 
-module.exports = db;
+module.exports = db

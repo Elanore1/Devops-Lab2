@@ -1,10 +1,19 @@
 services:
   redis:
+<<<<<<< HEAD
     image: redis:6.2-alpine
     container_name: redis
     restart: unless-stopped
     expose:
       - 6379:6379
+=======
+    image:  redis:6.2-alpine
+    container_name: redis
+    restart: unless-stopped
+    network_mode: bridge
+    expose:
+      - 6379
+>>>>>>> e60bfb7 (fix:vagrant,docker,userapi)
 
   eceuserapi:
     image: eceuserapi
@@ -17,8 +26,14 @@ services:
       REDIS_HOST: redis  # Update this line
     ports:
       - 3000:3000
+<<<<<<< HEAD
     volumes:
       - ./src:/src
       - /src/node_modules
     links:
       - redis
+=======
+    links:
+      - redis
+      
+>>>>>>> e60bfb7 (fix:vagrant,docker,userapi)
