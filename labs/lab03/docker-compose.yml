@@ -1,6 +1,7 @@
 services:
   redis:
 <<<<<<< HEAD
+<<<<<<< HEAD
     image: redis:6.2-alpine
     container_name: redis
     restart: unless-stopped
@@ -8,12 +9,18 @@ services:
       - 6379:6379
 =======
     image:  redis:6.2-alpine
+=======
+    image: redis:6.2-alpine
+>>>>>>> 0788d01 (fix:docker-compse,dbclient,index.js)
     container_name: redis
     restart: unless-stopped
-    network_mode: bridge
     expose:
+<<<<<<< HEAD
       - 6379
 >>>>>>> e60bfb7 (fix:vagrant,docker,userapi)
+=======
+      - 6379:6379
+>>>>>>> 0788d01 (fix:docker-compse,dbclient,index.js)
 
   eceuserapi:
     image: eceuserapi
@@ -27,6 +34,7 @@ services:
     ports:
       - 3000:3000
 <<<<<<< HEAD
+<<<<<<< HEAD
     volumes:
       - ./src:/src
       - /src/node_modules
@@ -37,3 +45,10 @@ services:
       - redis
       
 >>>>>>> e60bfb7 (fix:vagrant,docker,userapi)
+=======
+    volumes:
+      - ./src:/src
+      - /src/node_modules
+    links:
+      - redis
+>>>>>>> 0788d01 (fix:docker-compse,dbclient,index.js)

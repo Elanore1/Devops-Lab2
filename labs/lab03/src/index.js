@@ -6,6 +6,9 @@ const app = express()
 const port = process.env.PORT || 3000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0788d01 (fix:docker-compse,dbclient,index.js)
 
 const db = require('./dbClient')
 db.on("error", (err) => {
