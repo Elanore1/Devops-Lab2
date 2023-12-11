@@ -1,11 +1,52 @@
 ---
-- hosts: gitlab_server
-  # Run commands as root
+- name: Configure and provision VM
+  hosts: all
   become: true
-  # Roles to be executed on these hosts
-  roles:
-  - role: gitlab/install
-    tags: install
 
-  - role: gitlab/healthchecks
-    tags: check
+  tasks:
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: present
+      when: "'debian' in ansible_os_family"
+
+    - name: Install Node.js on Red Hat-based systems
+      yum:
+        name: nodejs
+        state: present
+      when: "'RedHat' in ansible_os_family"
+
+    - name: Install npm
+      apt:
+        name: npm
+        state: present
+      when: "'debian' in ansible_os_family"
+
+    - name: Install npm on Red Hat-based systems
+      yum:
+        name: npm
+        state: present
+      when: "'RedHat' in ansible_os_family"
+
+    - name: Install application dependencies
+      npm:
+        path: .
+        global: no
+
+    - name: Copy application code
+      copy:
+        src: .
+        
+    - name: Install and start PM2 (process manager for Node.js)
+      npm:
+        name: pm2
+        global: yes
+
+    - name: Start Node.js application using PM2
+      command: pm2 start your_application
+      args:
+        chdir: /vagrant  # Assuming your application code is in the same directory as the Vagrantfile
+
+  handlers:
+    - name: Restart Node.js Application
+      command: pm2 restart your_application
