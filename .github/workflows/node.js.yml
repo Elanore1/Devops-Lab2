@@ -35,11 +35,11 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        working-directory: ./labs/lab03
+        working-directory: ./userapi
         run: npm install
 
       - name: Run Test
-        working-directory: ./labs/lab03
+        working-directory: ./userapi
         run: npm run test
         env:
           REDIS_HOST: localhost
