@@ -18,7 +18,11 @@ services:
       NODE_ENV: production
       REDIS_HOST: redis
     ports:
+<<<<<<< HEAD
       - 5000:3000
+=======
+      - 3000:3000
+>>>>>>> 2345444 (fix:file placement correction and fix code)
     volumes:
       - ./userapi:/src
       - /src/node_modules

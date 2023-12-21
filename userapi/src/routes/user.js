@@ -40,7 +40,10 @@ userRouter
       resp.status(200).json(respObj)
     })
   })
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2345444 (fix:file placement correction and fix code)
   
 module.exports = userRouter
