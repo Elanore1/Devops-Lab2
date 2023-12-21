@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    restart: unless-stopped
+    expose:
+      - 6379:6379
+
+  eceuserapi:
+    image: eceuserapi
+    restart: unless-stopped
+    build:
+      context: ./userapi
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      REDIS_HOST: redis
+    ports:
+      - 3000:3000
+    volumes:
+      - ./userapi:/src
+      - /src/node_modules
+    links:
+      - redis

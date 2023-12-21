@@ -1,0 +1,84 @@
+---
+- name: Health Check for userapi App
+  hosts: test.server
+  become: true
+  gather_facts: true
+  connection: ssh
+
+  vars:
+    userapi_health_check_url: "http://localhost:3000"
+    ansible_python_interpreter: /usr/bin/python3  
+    userapi_required_packages:
+      - "body-parser"
+      - "express"
+      - "mixme"
+      - "nodemon"
+      - "redis"
+
+  tasks:
+    - name: Check if Node.js is installed
+      become: true
+      command: "command -v node"
+      register: node_installed
+      ignore_errors: true
+
+    - name: Check if npm is installed
+      become: true
+      command: "command -v npm"
+      register: npm_installed
+      ignore_errors: true
+
+    - name: Ensure Node.js is installed
+      become: true
+      block:
+        - apt:
+            name: nodejs
+            state: present
+      when: node_installed.rc != 0
+
+    - name: Ensure npm is installed
+      become: true
+      block:
+        - apt:
+            name: npm
+            state: present
+      when: npm_installed.rc != 0
+
+    - name: Install required Node.js packages
+      become: true
+      npm:
+        name: "{{ item }}"
+        global: no
+        state: present
+      loop:
+        - "{{ userapi_required_packages }}"
+        # Add any other required packages
+
+    - name: Start the userapi app
+      become: true
+      block:
+        - command: "npm start"
+          args:
+            chdir: "../../userapi"
+
+    - name: Wait for the app to start (adjust the timeout as needed)
+      become: true
+      block:
+        - wait_for:
+            host: "localhost"
+            port: 3000
+            timeout: 60
+
+    - name: Perform health check
+      become: true
+      block:
+        - uri:
+            url: "{{ userapi_health_check_url }}"
+            return_content: yes
+          register: health_check_result
+
+    - name: Display health check result
+      become: true
+      block:
+        - debug:
+            var: health_check_result.json
