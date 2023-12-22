@@ -19,10 +19,14 @@ services:
       REDIS_HOST: redis
     ports:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - 5000:3000
 =======
       - 3000:3000
 >>>>>>> 2345444 (fix:file placement correction and fix code)
+=======
+      - 5000:3000
+>>>>>>> fb0811a (feat&fix:fixed userapi files + start implementing kubernetes)
     volumes:
       - ./userapi:/src
       - /src/node_modules
