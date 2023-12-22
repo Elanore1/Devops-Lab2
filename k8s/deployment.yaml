@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eceuserapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eceuserapi
+  template:
+    metadata:
+      labels:
+        app: eceuserapi
+    spec:
+      containers:
+        - name: eceuserapi-container
+          image: noepham/eceuserapi:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REDIS_HOST
+              value: redis-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eceuserapi-service
+spec:
+  selector:
+    app: eceuserapi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: NodePort
