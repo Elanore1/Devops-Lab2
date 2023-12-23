@@ -7,7 +7,11 @@ It is a basic NodeJS web application exposing REST API that creates and stores u
 
 1. Start a web server
 2. Create a user
+<<<<<<< HEAD
 3. Create/Get a user
+=======
+3.Get a user
+>>>>>>> 0486d9f (feat: readme update)
 4. Vagrant
 5. Ansible
 6  Docker
@@ -103,12 +107,17 @@ ls
 You can either build the image from the userapi folder using :
 
 ```
+<<<<<<< HEAD
 docker build . 
+=======
+vagrant ssh
+>>>>>>> 0486d9f (feat: readme update)
 ```
 
 Or pull the image from the Docker repository :
 
 ```
+<<<<<<< HEAD
 docker pull noepham/eceuserapi
 ```
 
@@ -117,6 +126,9 @@ Then build the image from the image you just pulled :
 
 ```
 docker run noepham/eceuserapi
+=======
+vagrant ssh
+>>>>>>> 0486d9f (feat: readme update)
 ```
 
 Afterwards , you should be able to use the image if you have redis running in the background:
