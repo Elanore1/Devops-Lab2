@@ -1,6 +1,6 @@
 ---
 - name: Health Check for userapi App
-  hosts: test.server
+  hosts: redis_server
   become: true
   gather_facts: true
   connection: ssh
@@ -52,7 +52,7 @@
         state: present
       loop:
         - "{{ userapi_required_packages }}"
-        # Add any other required packages
+        
 
     - name: Start the userapi app
       become: true
@@ -61,7 +61,7 @@
           args:
             chdir: "../../userapi"
 
-    - name: Wait for the app to start (adjust the timeout as needed)
+    - name: Wait for the app to start
       become: true
       block:
         - wait_for:
