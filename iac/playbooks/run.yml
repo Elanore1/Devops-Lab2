@@ -1,10 +1,14 @@
 ---
 - name: Health Check for userapi App
 <<<<<<< HEAD
+<<<<<<< HEAD
   hosts: redis_server
 =======
   hosts: test.server
 >>>>>>> 2345444 (fix:file placement correction and fix code)
+=======
+  hosts: redis_server
+>>>>>>> bd1795c (fix:fixed vagrant for ssh)
   become: true
   gather_facts: true
   connection: ssh
@@ -57,10 +61,14 @@
       loop:
         - "{{ userapi_required_packages }}"
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
         # Add any other required packages
 >>>>>>> 2345444 (fix:file placement correction and fix code)
+=======
+        
+>>>>>>> bd1795c (fix:fixed vagrant for ssh)
 
     - name: Start the userapi app
       become: true
@@ -70,10 +78,14 @@
             chdir: "../../userapi"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     - name: Wait for the app to start
 =======
     - name: Wait for the app to start (adjust the timeout as needed)
 >>>>>>> 2345444 (fix:file placement correction and fix code)
+=======
+    - name: Wait for the app to start
+>>>>>>> bd1795c (fix:fixed vagrant for ssh)
       become: true
       block:
         - wait_for:
