@@ -10,18 +10,16 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  # Define the  VM
-  config.vm.define "test.server" do |server|
+  # Define the VM
+  config.vm.define "redis_server" do |server|
     # Specify the Vagrant box to use
-    server.vm.box = "ubuntu/bionic64"
-
-    # Explicitly add the local box using the file path
-    server.vm.box_url = "./test.centos"
-    # Specify the VM ip address
+    server.vm.box = "hashicorp/bionic64"
+    config.vm.synced_folder "../userapi", "/home/userapi"
+    #config.vm.synced_folder "../userapi", "/home/userapi"
     config.vm.network "forwarded_port", guest: 80, host: 8080
     # Specify the VM specs when using the Virtualbox provisioner
     server.vm.provider "virtualbox" do |vb|
-      vb.name =  "test.server"
+      vb.name =  "redis.server.local"
       # VM RAM in MB
       vb.memory = 2048
       # VM CPUs
@@ -31,17 +29,24 @@ Vagrant.configure("2") do |config|
       vmware.vmx["memsize"] = "2048"
       vmware.vmx["numvcpus"] = "1"
     end
-
-    # Set up synced folder
-    config.vm.synced_folder "", "/vagrant/playbooks"
   end
+  
+  # Start provisioning
+  #$script = <<-SCRIPT
+  #echo I am provisioning ...
+  #date > /etc/vagrant_provisioned_at
+  #SCRIPT
 
-  config.vm.provision "ansible_local" do |ansible|
-    # The path to the playbooks entry point
-    ansible.playbook = "playbooks/run.yml"
-    # Only run the roles with these tags
-    ansible.tags = "install"
-  end
 
+  #config.vm.provision "shell",
+   # inline: $script
+
+# Use Vagrant Ansible provisioner
+config.vm.provision "ansible_local" do |ansible|
+  # The path to the playbooks entry point
+  ansible.playbook = "playbooks/run.yml"
+  # Only run the roles with these tags
+  ansible.tags = "install"
+end
 
 end

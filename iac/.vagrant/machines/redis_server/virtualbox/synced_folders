@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/userapi":{"guestpath":"/home/userapi","hostpath":"C:/Users/Noeph/Documents/devops/project/ece-devops-2023-fall-grp04-LELIEVRE-PHAM/userapi","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/Noeph/Documents/devops/project/ece-devops-2023-fall-grp04-LELIEVRE-PHAM/iac","disabled":false,"__vagrantfile":true}}}
