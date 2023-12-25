@@ -1,26 +1,22 @@
-version: '3.4'
+version: '3'
 
 services:
-  redis:
-    image: redis:6.2-alpine
-    container_name: redis
-    restart: unless-stopped
-    expose:
-      - 6379:6379
-
   eceuserapi:
-    image: eceuserapi
-    restart: unless-stopped
-    build:
-      context: ./userapi
-      dockerfile: Dockerfile
-    environment:
-      NODE_ENV: production
-      REDIS_HOST: redis
+    image: noepham/eceuserapi:latest
     ports:
-      - 5000:3000
-    volumes:
-      - ./userapi:/src
-      - /src/node_modules
-    links:
+      - "5000:3000"
+    depends_on:
       - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
