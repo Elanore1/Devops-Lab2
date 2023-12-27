@@ -125,7 +125,7 @@ Afterwards , you should be able to use the image if you have redis running in th
 IF you want to start the application directly from the root of the repository you can run:
 
 ```
-vagrant ssh
+docker-compose up
 ```
 
 The application should be up and ready to use :
@@ -133,7 +133,7 @@ The application should be up and ready to use :
 
 ## Kubernetes 
 
-Start by using the minikube start command from the k8s file:
+Start by using the minikube start command from the k8s folder:
 
 ```
 minikube start
@@ -142,26 +142,27 @@ minikube start
 You will then need to run the deployment , service and persitent-volume and persistent-volume-claim to run the app:
 
 ```
-vagrant ssh
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl apply -f persistent-volume-claim.yaml
+kubectl apply -f persistent-volume.yaml
 ```
 
-You should be able to try one of the command like:
+You should be able to find the url of the service using:
 
 ```
-vagrant ssh
+minikube service eceuserapi-service --url
 ```
 
-Using the minikube ip and port , you can get them by running : 
+Then you can start using the new ip using the same command but adapting the url:
 
 ```
-vagrant ssh
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"username":"sergkudinov","firstname":"sergei","lastname":"kudinov"}' \
+  <Minikube-Service-URL>/user
 ```
 
-And:
-
-```
-vagrant ssh
-```
 
 ## Istio
 

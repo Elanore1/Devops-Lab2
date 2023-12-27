@@ -19,7 +19,7 @@ spec:
             - containerPort: 3000
           env:
             - name: REDIS_HOST
-              value: "10.101.200.175"
+              value: redis-service
 
 ---
 apiVersion: apps/v1
