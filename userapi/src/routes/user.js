@@ -40,7 +40,15 @@ userRouter
       resp.status(200).json(respObj)
     })
   })
+<<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2345444 (fix:file placement correction and fix code)
+=======
+
+
+>>>>>>> fb0811a (feat&fix:fixed userapi files + start implementing kubernetes)
   
 module.exports = userRouter
