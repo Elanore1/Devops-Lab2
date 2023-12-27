@@ -30,16 +30,6 @@ Vagrant.configure("2") do |config|
       vmware.vmx["numvcpus"] = "1"
     end
   end
-  
-  # Start provisioning
-  #$script = <<-SCRIPT
-  #echo I am provisioning ...
-  #date > /etc/vagrant_provisioned_at
-  #SCRIPT
-
-
-  #config.vm.provision "shell",
-   # inline: $script
 
 # Use Vagrant Ansible provisioner
 config.vm.provision "ansible_local" do |ansible|

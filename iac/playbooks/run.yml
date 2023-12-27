@@ -1,5 +1,5 @@
 ---
-- name: Health Check for userapi App
+- name: Health Check for userapi App and Redis Server
   hosts: redis_server
   become: true
   gather_facts: true
@@ -7,42 +7,25 @@
 
   vars:
     userapi_health_check_url: "http://localhost:3000"
-    ansible_python_interpreter: /usr/bin/python3  
-    userapi_required_packages:
-      - "body-parser"
-      - "express"
-      - "mixme"
-      - "nodemon"
-      - "redis"
+    redis_health_check_port: 6379
 
   tasks:
-    - name: Check if Node.js is installed
+    - name: Check if Node.js and npm are installed
       become: true
       command: "command -v node"
       register: node_installed
       ignore_errors: true
 
-    - name: Check if npm is installed
-      become: true
-      command: "command -v npm"
-      register: npm_installed
-      ignore_errors: true
-
-    - name: Ensure Node.js is installed
+    - name: Ensure Node.js and npm are installed
       become: true
       block:
         - apt:
             name: nodejs
             state: present
-      when: node_installed.rc != 0
-
-    - name: Ensure npm is installed
-      become: true
-      block:
         - apt:
             name: npm
             state: present
-      when: npm_installed.rc != 0
+      when: node_installed.rc != 0
 
     - name: Install required Node.js packages
       become: true
@@ -51,34 +34,48 @@
         global: no
         state: present
       loop:
-        - "{{ userapi_required_packages }}"
-        
+        - "body-parser"
+        - "express"
+        - "mixme"
+        - "nodemon"
+        - "redis"
 
     - name: Start the userapi app
       become: true
-      block:
-        - command: "npm start"
-          args:
-            chdir: "../../userapi"
+      command: "npm start"
+      args:
+        chdir: "../../userapi"
 
     - name: Wait for the app to start
       become: true
-      block:
-        - wait_for:
-            host: "localhost"
-            port: 3000
-            timeout: 60
+      wait_for:
+        host: "localhost"
+        port: 3000
+        timeout: 60
 
-    - name: Perform health check
+    - name: Perform health check for userapi app
       become: true
-      block:
-        - uri:
-            url: "{{ userapi_health_check_url }}"
-            return_content: yes
-          register: health_check_result
+      uri:
+        url: "{{ userapi_health_check_url }}"
+        return_content: yes
+      register: userapi_health_check_result
 
-    - name: Display health check result
+    - name: Display userapi health check result
       become: true
-      block:
-        - debug:
-            var: health_check_result.json
+      debug:
+        var: userapi_health_check_result.json
+
+    - name: Perform health check for Redis server
+      become: true
+      wait_for:
+        host: "localhost"
+        port: "{{ redis_health_check_port }}"
+        timeout: 10
+      ignore_errors: true
+      register: redis_health_check_result
+
+    - name: Display Redis health check result
+      become: true
+      debug:
+        var: redis_health_check_result
+  

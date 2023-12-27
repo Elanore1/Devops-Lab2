@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-pv
+  name: redis-pvc
 spec:
   capacity:
     storage: 1Gi
@@ -9,17 +9,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "./redis-data"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: eceuserapi-pv
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "./eceuserapi-data"
+    path: "./redis-data"  # Update with your actual path
