@@ -40,7 +40,7 @@ spec:
         - name: redis-container
           image: redis:latest
           volumeMounts:
-            - mountPath: "/redis-data"
+            - mountPath: "/data"
               name: redis-storage
       volumes:
         - name: redis-storage

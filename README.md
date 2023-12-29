@@ -50,7 +50,12 @@ npm start
 
 It will start a web server available in your browser at http://localhost:3000.
 
+![Screenshot](Hello World.png)
+
+
 2. Create a user
+
+![Screenshot](new user.png)
 
 Send a POST (REST protocol) request using terminal:
 
@@ -67,6 +72,8 @@ It will output:
 {"status":"success","msg":"OK"}
 ```
 
+![Screenshot](check user.png)
+
 Another way to test your REST API is to use [Postman](https://www.postman.com/).
 
 ## Testing
@@ -77,6 +84,14 @@ From the root directory of the project, run:
 npm test
 ```
 
+![Screenshot](npm test.png)
+
+## CI/CD Pipeline
+
+We made this part using a workflow from Github Action , each time a new push is made on the main branch , the workflow will check if the userapi still works and if it's able to connect to the redis database
+
+
+
 ## Vagrant / Ansible
 
 1. From the iac folder , run:
@@ -84,6 +99,10 @@ npm test
 ```
 vagrant up
 ```
+You can see during the start of the machine the installation of Ansible and the healthchecks from the playbooks
+
+![Screenshot](ansiblehealthcheck.png)
+
 
 2. From there you can access the terminal of vagrant with SSH using:
 
@@ -91,11 +110,14 @@ vagrant up
 vagrant ssh
 ```
 
+
 3. You should be able to see the files of the app inside the container using :
 
 ```
 ls
 ```
+
+![Screenshot](Vagrant SSH.png)
 
 
 ## Docker and Docker Compose
@@ -106,14 +128,15 @@ You can either build the image from the userapi folder using :
 docker build . 
 ```
 
-Or pull the image from the Docker repository :
+Or pull the image from the Docker repository (it will take the latest tag) :
+
+![Screenshot](DockerPush.png)
 
 ```
 docker pull noepham/eceuserapi
 ```
 
 Then build the image from the image you just pulled :
-
 
 ```
 docker run noepham/eceuserapi
@@ -127,8 +150,14 @@ IF you want to start the application directly from the root of the repository yo
 ```
 docker-compose up
 ```
+![Screenshot](Docker compose launches.png)
 
 The application should be up and ready to use :
+
+![Screenshot](localhost8000.png)
+![Screenshot](localhost8000user.png)
+
+
 
 
 ## Kubernetes 
@@ -151,8 +180,10 @@ kubectl apply -f persistent-volume.yaml
 You should be able to find the url of the service using:
 
 ```
+minikube service eceuserapi-service or
 minikube service eceuserapi-service --url
 ```
+![Screenshot](serviceeceuserapi.png)
 
 Then you can start using the new ip using the same command but adapting the url:
 
@@ -163,11 +194,18 @@ curl --header "Content-Type: application/json" \
   <Minikube-Service-URL>/user
 ```
 
+![Screenshot](kubernetesapp.png)
+
+Then you can try to delete the deployments and service and see that the data is still present:
+
+![Screenshot](persistentvolume.png)
+
+
 
 ## Istio
 
 
-## Routing
+## Monitoring
 
 
 
