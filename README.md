@@ -50,7 +50,7 @@ npm start
 
 It will start a web server available in your browser at http://localhost:3000.
 
-![Screenshot](Hello World.png)
+![Screenshot](images/Hello%20World.png)
 
 
 2. Create a user
@@ -72,7 +72,7 @@ It will output:
 {"status":"success","msg":"OK"}
 ```
 
-![Screenshot](check user.png)
+![Screenshot](images/check%20user.png)
 
 Another way to test your REST API is to use [Postman](https://www.postman.com/).
 
@@ -84,7 +84,7 @@ From the root directory of the project, run:
 npm test
 ```
 
-![Screenshot](npm test.png)
+![Screenshot](images/npm%20test.png.png)
 
 ## CI/CD Pipeline
 
@@ -101,7 +101,7 @@ vagrant up
 ```
 You can see during the start of the machine the installation of Ansible and the healthchecks from the playbooks
 
-![Screenshot](ansiblehealthcheck.png)
+![Screenshot](images/ansiblehealthcheck.png)
 
 
 2. From there you can access the terminal of vagrant with SSH using:
@@ -117,7 +117,7 @@ vagrant ssh
 ls
 ```
 
-![Screenshot](Vagrant SSH.png)
+![Screenshot](images/Vagrant%20SSH.png)
 
 
 ## Docker and Docker Compose
@@ -130,7 +130,7 @@ docker build .
 
 Or pull the image from the Docker repository (it will take the latest tag) :
 
-![Screenshot](DockerPush.png)
+![Screenshot](images/DockerPush.png)
 
 ```
 docker pull noepham/eceuserapi
